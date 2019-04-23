@@ -5,6 +5,8 @@
 using System;
 using Zebble;
 using Zebble.Services;
+using Zebble.Plugin;
+using Zebble.Device;
 using UI.Modules;
 using UI.Pages;
 using UI.Templates;
@@ -17,36 +19,6 @@ namespace UI
         public static void LoadAll()
         {
             // ======================================================================
-            // App.UI\Styles\Android.css---------------------------------------------
-
-            if (CssEngine.Platform == DevicePlatform.Android)
-            {
-                CssEngine.Add(new File_App.UI.Styles.Android.TextInputCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TextViewCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.ButtonCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.IconButtonCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.IconButtonTextViewCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.PopUpDialogCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.PopUpPageCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.ModuleHeaderTitleCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.NavigationBarTitleCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TextInput_1CssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.ListViewCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.ListViewListViewItemCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.ListViewListViewItemImageViewViewRowCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TabsCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TabsTabsTabCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TabsTabsTabActiveCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TabsTabsTabLabelCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.TabsTabsTabIconCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.SwitchCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.SwitchBarCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.SwitchToggleCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.SwitchCheckedToggleCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Android.SwitchCheckedBarCssRule());
-            }
-
-            // ======================================================================
             // App.UI\Styles\Common.css----------------------------------------------
             CssEngine.Add(new File_App.UI.Styles.Common.TextViewCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.ButtonCssRule());
@@ -57,10 +29,10 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Common.IconButtonDisabledCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.IconButtonTextViewCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.PopUpCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Common.WaitingIndicatorCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Common.IndicatorCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.PopUpHeaderTitleCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.PopUpTitleCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Common.WaitingIndicatorImageCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Common.IndicatorImageCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.DialogTitleCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.DialogButtonsRowButtonCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.DialogButtonsRowButtonPrimaryButtonCssRule());
@@ -79,7 +51,6 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Common.TimePickerCellLabelCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.DatePickerCellActiveLabelCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.TimePickerCellActiveLabelCssRule());
-
             CssEngine.Add(new File_App.UI.Styles.Common.NavbarBackgroundCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.NavigationBarIconButtonCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.NavigationBarButtonCssRule());
@@ -98,8 +69,8 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Common.ListViewViewRowCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.ListViewListViewItemCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.ListViewListViewItemTitleCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Common.ListViewSlideInTextViewCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Common.ListViewSlideInTextViewDeleteButtonCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Common.ListViewRightSlideInTextViewCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Common.ListViewRightSlideInTextViewDeleteButtonCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.StandardListListViewItemCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.StandardListListViewItemIconCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.StandardListListViewLazyLoadedListViewItemCssRule());
@@ -110,7 +81,6 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Common.ListViewModuleHeaderTitleCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.HeaderIntroCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.PrimaryButtonCssRule());
-
             CssEngine.Add(new File_App.UI.Styles.Common.BottomButtonsRowCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.FormFieldHeaderCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.MainMenuCssRule());
@@ -118,29 +88,7 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Common.MainMenuLogoImageCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.MainMenuIconButtonCssRule());
             CssEngine.Add(new File_App.UI.Styles.Common.MainMenuIconButtonIconCssRule());
-
-            // ======================================================================
-            // App.UI\Styles\iOS.css-------------------------------------------------
-
-            if (CssEngine.Platform == DevicePlatform.IOS)
-            {
-                CssEngine.Add(new File_App.UI.Styles.IOS.TextInputCssRule());
-                CssEngine.Add(new File_App.UI.Styles.IOS.TextViewCssRule());
-                CssEngine.Add(new File_App.UI.Styles.IOS.ModuleHeaderTitleCssRule());
-                CssEngine.Add(new File_App.UI.Styles.IOS.DialogCssRule());
-                CssEngine.Add(new File_App.UI.Styles.IOS.ModalCssRule());
-                CssEngine.Add(new File_App.UI.Styles.IOS.PrimaryButtonCssRule());
-            }
-
-            // ======================================================================
-            // App.UI\Styles\Windows.css---------------------------------------------
-
-            if (CssEngine.Platform == DevicePlatform.Windows)
-            {
-                CssEngine.Add(new File_App.UI.Styles.Windows.TextViewCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Windows.TextInputCssRule());
-                CssEngine.Add(new File_App.UI.Styles.Windows.ModuleHeaderTitleCssRule());
-            }
+            CssEngine.Add(new File_App.UI.Styles.Common.DefaultBodyScrollerBodyCssRule());
 
             // ======================================================================
             // App.UI\Styles\_Core.css-----------------------------------------------
@@ -160,7 +108,6 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Core.SwitchCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.SwitchBarCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.SwitchToggleCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Core.VideoPlayerCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.FormFieldCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.FormFieldLabelCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.FormFieldIconCssRule());
@@ -186,8 +133,9 @@ namespace UI
             CssEngine.Add(new File_App.UI.Styles.Core.NavBarPageBodyScrollerBodyCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.NavigationBarCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.NavigationBarTitleCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Core.WaitingIndicatorCssRule());
-            CssEngine.Add(new File_App.UI.Styles.Core.WaitingIndicatorImageViewCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Core.IndicatorCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Core.IndicatorImageViewCssRule());
+            CssEngine.Add(new File_App.UI.Styles.Core.Indicator_1CssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.RefreshingIndicatorCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.TabsCssRule());
             CssEngine.Add(new File_App.UI.Styles.Core.TabsTabsTabCssRule());
@@ -207,636 +155,12 @@ namespace UI
     }
 }
 
+// Ensure auto-generated namespaces exist:
 namespace UI.Modules { }
 namespace UI.Pages { }
 namespace UI.Templates { }
-namespace Zebble.Data { }
 namespace Zebble.Plugin { }
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "TextInput")]
-    [CssBody("font-family: Roboto;")]
-    class TextInputCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextInput
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextInput)untypedView;
-            view.Css.Font.Name = "Roboto";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "TextView")]
-    [CssBody("font-family: Roboto;")]
-    class TextViewCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextView
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextView)untypedView;
-            view.Css.Font.Name = "Roboto";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Button")]
-    [CssBody("text-transform: uppercase; height: 36px; border-radius: 4px;")]
-    class ButtonCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Button
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Button)untypedView;
-            view.Css.Height = 36;
-            view.Css.TextTransform = TextTransform.Uppercase;
-            view.Css.Border.Radius = 4;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "IconButton")]
-    [CssBody("text-transform: uppercase; height: 36px; border-radius: 4px;")]
-    class IconButtonCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: IconButton
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (IconButton)untypedView;
-            view.Css.Height = 36;
-            view.Css.TextTransform = TextTransform.Uppercase;
-            view.Css.Border.Radius = 4;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "IconButton #TextView")]
-    [CssBody("text-transform: uppercase;")]
-    class IconButtonTextViewCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #TextView
-
-            view = CssEngine.FindParentByType<IconButton>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.TextTransform = TextTransform.Uppercase;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "PopUp Dialog")]
-    [CssBody("border-radius: 4px;")]
-    class PopUpDialogCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Dialog
-
-            view = CssEngine.FindParentByType<PopUp>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Dialog)untypedView;
-            view.Css.Border.Radius = 4;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "PopUp Page")]
-    [CssBody("border-radius: 4px;")]
-    class PopUpPageCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Page
-
-            view = CssEngine.FindParentByType<PopUp>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Page)untypedView;
-            view.Css.Border.Radius = 4;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", ".module-header-title")]
-    [CssBody("font-size: 24px;")]
-    class ModuleHeaderTitleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: .module-header-title
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Font.Size = 24;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "NavigationBar #Title")]
-    [CssBody("text-align: left; padding-left: 65px; font-size: 20px; font-weight: normal;")]
-    class NavigationBarTitleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Title
-
-            view = CssEngine.FindParentByType<NavigationBar>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Font.Size = 20;
-            view.Css.Font.Bold = false;
-            view.Css.Padding.Left = 65;
-            view.Css.TextAlignment = Alignment.Left;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "TextInput")]
-    [CssBody("font-family: Roboto; border: 0 #e6e6e6; border-bottom-width: 1px; padding: 2px; margin-bottom: 10px;")]
-    class TextInput_1CssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextInput
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextInput)untypedView;
-            view.Css.Font.Name = "Roboto";
-            view.Css.Padding(2);
-            view.Css.Margin.Bottom = 10;
-            view.Css.Border = new Border(0, "#e6e6e6");
-            view.Css.Border.Bottom = 1;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "ListView")]
-    [CssBody("padding-top: 8px;")]
-    class ListViewCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: ListView
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (ListView)untypedView;
-            view.Css.Padding.Top = 8;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "ListView ListViewItem")]
-    [CssBody("height: 72px; padding-left: 10px; padding-right: 10px;")]
-    class ListViewListViewItemCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: ListViewItem
-
-            view = CssEngine.FindParentByType<ListView>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (ListViewItem)untypedView;
-            view.Css.Height = 72;
-            view.Css.Padding.Left = 10;
-            view.Css.Padding.Right = 10;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "ListView ListViewItem ImageView.view-row")]
-    [CssBody("display: none;")]
-    class ListViewListViewItemImageViewViewRowCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            if (!(view is ImageView && HasClass(view, "view-row"))) return false;
-
-            view = CssEngine.FindParentByType<ListViewItem>(view);
-
-            if (view == null) return false;
-
-            view = CssEngine.FindParentByType<ListView>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (ImageView)untypedView;
-            view.Css.Ignored = true;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Tabs")]
-    [CssBody("height: auto;")]
-    class TabsCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Tabs
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Tabs)untypedView;
-            view.Css.Height = null;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Tabs Tabs-Tab")]
-    [CssBody("border: 0 #43aaa9; font-size: 14px; margin-bottom: 1px; height: 40px;")]
-    class TabsTabsTabCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Tabs-Tab
-
-            view = CssEngine.FindParentByType<Tabs>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Tabs.Tab)untypedView;
-            view.Css.Height = 40;
-            view.Css.Font.Size = 14;
-            view.Css.Margin.Bottom = 1;
-            view.Css.Border = new Border(0, "#43aaa9");
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Tabs Tabs-Tab:active")]
-    [CssBody("background-color: transparent; border-bottom-width: 2px;")]
-    class TabsTabsTabActiveCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            if (!(view is Tabs.Tab && view.PseudoCssState.ContainsWholeWord("active"))) return false;
-
-            view = CssEngine.FindParentByType<Tabs>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Tabs.Tab)untypedView;
-            view.Css.BackgroundColor = Colors.Transparent;
-            view.Css.Border.Bottom = 2;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Tabs Tabs-Tab #Label")]
-    [CssBody("text-transform: uppercase; height: 100%; vertical-align: middle;")]
-    class TabsTabsTabLabelCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Label
-
-            view = CssEngine.FindParentByType<Tabs.Tab>(view);
-
-            if (view == null) return false;
-
-            view = CssEngine.FindParentByType<Tabs>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Height = 100.Percent();
-            view.Css.TextTransform = TextTransform.Uppercase;
-            view.Css.TextAlignment = Alignment.Middle;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Tabs Tabs-Tab #Icon")]
-    [CssBody("display: none;")]
-    class TabsTabsTabIconCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Icon
-
-            view = CssEngine.FindParentByType<Tabs.Tab>(view);
-
-            if (view == null) return false;
-
-            view = CssEngine.FindParentByType<Tabs>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Ignored = true;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Switch")]
-    [CssBody("width: 50px;")]
-    class SwitchCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Switch
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Switch)untypedView;
-            view.Css.Width = 50;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Switch #Bar")]
-    [CssBody("background: #C8C8C8; height: 14px; border-radius: 7px; margin-top: 6px; opacity: 1;")]
-    class SwitchBarCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Bar
-
-            view = CssEngine.FindParentByType<Switch>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Height = 14;
-            view.Css.Margin.Top = 6;
-            view.Css.BackgroundColor = "#C8C8C8";
-            view.Css.Border.Radius = 7;
-            view.Css.Opacity = 1;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Switch #Toggle")]
-    [CssBody("background: white; border-width: 1px; border-color: #C8C8C8; margin: 0;")]
-    class SwitchToggleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Toggle
-
-            view = CssEngine.FindParentByType<Switch>(view);
-
-            if (view == null) return false;
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Margin(0);
-            view.Css.BackgroundColor = Colors.White;
-            view.Css.Border.Width = 1;
-            view.Css.Border.Color = "#C8C8C8";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Switch:checked #Toggle")]
-    [CssBody("background: #43aaa9; border-color: transparent;")]
-    class SwitchCheckedToggleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Toggle
-
-            view = view.parent;
-            while (true)
-            {
-                if (view == null) return false;
-                else if (view is Switch && view.PseudoCssState.ContainsWholeWord("checked")) break;
-                view = view.parent;
-            }
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.BackgroundColor = "#43aaa9";
-            view.Css.Border.Color = Colors.Transparent;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Android
-{
-    [CssSelector(DevicePlatform.Android, "Styles\\Android.css", "Switch:checked #Bar")]
-    [CssBody("opacity: 0.35; background: #43aaa9;")]
-    class SwitchCheckedBarCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: #Bar
-
-            view = view.parent;
-            while (true)
-            {
-                if (view == null) return false;
-                else if (view is Switch && view.PseudoCssState.ContainsWholeWord("checked")) break;
-                view = view.parent;
-            }
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Opacity = 0.35f;
-            view.Css.BackgroundColor = "#43aaa9";
-
-            return Task.CompletedTask;
-        }
-    }
-}
+namespace Zebble.Data { }
 
 namespace File_App.UI.Styles.Common
 {
@@ -1041,7 +365,7 @@ namespace File_App.UI.Styles.Common
         public override Task Apply(View untypedView)
         {
             var view = (PopUp)untypedView;
-            view.Css.Margin.Top = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r, h) => (r - h) / 2);
+            view.Css.Margin.Top = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r,h) => (r - h) / 2);
 
             return Task.CompletedTask;
         }
@@ -1050,21 +374,21 @@ namespace File_App.UI.Styles.Common
 
 namespace File_App.UI.Styles.Common
 {
-    [CssSelector("Styles\\Common.css", "Waiting-Indicator")]
+    [CssSelector("Styles\\Common.css", "Indicator")]
     [CssBody("margin-top: calc(\"View.Root.Height, view.Height, (r,h) => (r - h) / 2\");")]
-    class WaitingIndicatorCssRule : CssRule
+    class IndicatorCssRule : CssRule
     {
         public override bool Matches(View view)
         {
-            // CssEngine will only call me if a view matches: Waiting-Indicator
+            // CssEngine will only call me if a view matches: Indicator
 
             return true;
         }
 
         public override Task Apply(View untypedView)
         {
-            var view = (Waiting.Indicator)untypedView;
-            view.Css.Margin.Top = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r, h) => (r - h) / 2);
+            var view = (Indicator)untypedView;
+            view.Css.Margin.Top = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r,h) => (r - h) / 2);
 
             return Task.CompletedTask;
         }
@@ -1125,15 +449,15 @@ namespace File_App.UI.Styles.Common
 
 namespace File_App.UI.Styles.Common
 {
-    [CssSelector("Styles\\Common.css", "Waiting-Indicator #Image")]
+    [CssSelector("Styles\\Common.css", "Indicator #Image")]
     [CssBody("background: url(Images/icons/Spinner.gif);")]
-    class WaitingIndicatorImageCssRule : CssRule
+    class IndicatorImageCssRule : CssRule
     {
         public override bool Matches(View view)
         {
             // CssEngine will only call me if a view matches: #Image
 
-            view = CssEngine.FindParentByType<Waiting.Indicator>(view);
+            view = CssEngine.FindParentByType<Indicator>(view);
 
             if (view == null) return false;
 
@@ -1651,7 +975,6 @@ namespace File_App.UI.Styles.Common
     }
 }
 
-
 namespace File_App.UI.Styles.Common
 {
     [CssSelector("Styles\\Common.css", ".navbar-background")]
@@ -2149,15 +1472,15 @@ namespace File_App.UI.Styles.Common
 
 namespace File_App.UI.Styles.Common
 {
-    [CssSelector("Styles\\Common.css", "ListView #SlideIn TextView")]
+    [CssSelector("Styles\\Common.css", "ListView #RightSlideIn TextView")]
     [CssBody("height: 100%; margin: 0; color: white; background: #444; padding: 10px; AutoSizeWidth: calc(\"true\");")]
-    class ListViewSlideInTextViewCssRule : CssRule
+    class ListViewRightSlideInTextViewCssRule : CssRule
     {
         public override bool Matches(View view)
         {
             // CssEngine will only call me if a view matches: TextView
 
-            view = CssEngine.FindParentById(view, "SlideIn");
+            view = CssEngine.FindParentById(view, "RightSlideIn");
 
             if (view == null) return false;
 
@@ -2185,15 +1508,15 @@ namespace File_App.UI.Styles.Common
 
 namespace File_App.UI.Styles.Common
 {
-    [CssSelector("Styles\\Common.css", "ListView #SlideIn TextView.delete-button")]
+    [CssSelector("Styles\\Common.css", "ListView #RightSlideIn TextView.delete-button")]
     [CssBody("background: #ff4c32;")]
-    class ListViewSlideInTextViewDeleteButtonCssRule : CssRule
+    class ListViewRightSlideInTextViewDeleteButtonCssRule : CssRule
     {
         public override bool Matches(View view)
         {
             if (!(view is TextView && HasClass(view, "delete-button"))) return false;
 
-            view = CssEngine.FindParentById(view, "SlideIn");
+            view = CssEngine.FindParentById(view, "RightSlideIn");
 
             if (view == null) return false;
 
@@ -2481,6 +1804,7 @@ namespace File_App.UI.Styles.Common
         }
     }
 }
+
 namespace File_App.UI.Styles.Common
 {
     [CssSelector("Styles\\Common.css", ".bottom-buttons-row")]
@@ -2672,205 +1996,31 @@ namespace File_App.UI.Styles.Common
     }
 }
 
-namespace File_App.UI.Styles.IOS
+namespace File_App.UI.Styles.Common
 {
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", "TextInput")]
-    [CssBody("font-family: Arial;")]
-    class TextInputCssRule : CssRule
+    [CssSelector("Styles\\Common.css", "Default #BodyScroller > #Body")]
+    [CssBody("padding: 10px;")]
+    class DefaultBodyScrollerBodyCssRule : CssRule
     {
         public override bool Matches(View view)
         {
-            // CssEngine will only call me if a view matches: TextInput
+            // CssEngine will only call me if a view matches: #Body
 
-            return true;
-        }
+            view = view.parent;
 
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextInput)untypedView;
-            view.Css.Font.Name = "Arial";
+            if (view == null) return false;
+            else if (!(view.Id == "BodyScroller")) return false;
 
-            return Task.CompletedTask;
-        }
-    }
-}
+            view = CssEngine.FindParentByType<Default>(view);
 
-namespace File_App.UI.Styles.IOS
-{
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", "TextView")]
-    [CssBody("font-family: Arial;")]
-    class TextViewCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextView
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextView)untypedView;
-            view.Css.Font.Name = "Arial";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.IOS
-{
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", ".module-header-title")]
-    [CssBody("font-size: 24px; font-weight: bold;")]
-    class ModuleHeaderTitleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: .module-header-title
+            if (view == null) return false;
 
             return true;
         }
 
         public override Task Apply(View view)
         {
-            view.Css.Font.Size = 24;
-            view.Css.Font.Bold = true;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.IOS
-{
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", "Dialog")]
-    [CssBody("border-radius: 15px;")]
-    class DialogCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Dialog
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Dialog)untypedView;
-            view.Css.Border.Radius = 15;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.IOS
-{
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", "Modal")]
-    [CssBody("border-radius: 15px;")]
-    class ModalCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: Modal
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (Modal)untypedView;
-            view.Css.Border.Radius = 15;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.IOS
-{
-    [CssSelector(DevicePlatform.IOS, "Styles\\iOS.css", ".primary-button")]
-    [CssBody("border-radius: 5px;")]
-    class PrimaryButtonCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: .primary-button
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Border.Radius = 5;
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Windows
-{
-    [CssSelector(DevicePlatform.Windows, "Styles\\Windows.css", "TextView")]
-    [CssBody("font-family: \"Segoe UI\";")]
-    class TextViewCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextView
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextView)untypedView;
-            view.Css.Font.Name = "Segoe UI";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Windows
-{
-    [CssSelector(DevicePlatform.Windows, "Styles\\Windows.css", "TextInput")]
-    [CssBody("font-family: \"Segoe UI\";")]
-    class TextInputCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: TextInput
-
-            return true;
-        }
-
-        public override Task Apply(View untypedView)
-        {
-            var view = (TextInput)untypedView;
-            view.Css.Font.Name = "Segoe UI";
-
-            return Task.CompletedTask;
-        }
-    }
-}
-
-namespace File_App.UI.Styles.Windows
-{
-    [CssSelector(DevicePlatform.Windows, "Styles\\Windows.css", ".module-header-title")]
-    [CssBody("font-size: 40px;")]
-    class ModuleHeaderTitleCssRule : CssRule
-    {
-        public override bool Matches(View view)
-        {
-            // CssEngine will only call me if a view matches: .module-header-title
-
-            return true;
-        }
-
-        public override Task Apply(View view)
-        {
-            view.Css.Font.Size = 40;
+            view.Css.Padding(10);
 
             return Task.CompletedTask;
         }
@@ -2954,7 +2104,7 @@ namespace File_App.UI.Styles.Core
 namespace File_App.UI.Styles.Core
 {
     [CssSelector("Styles\\_Core.css", "CheckBox:checked")]
-    [CssBody("background-color: black;")]
+    [CssBody("background-color: #43aaa9;")]
     class CheckBoxCheckedCssRule : CssRule
     {
         public override bool Matches(View view)
@@ -2967,7 +2117,7 @@ namespace File_App.UI.Styles.Core
         public override Task Apply(View untypedView)
         {
             var view = (CheckBox)untypedView;
-            view.Css.BackgroundColor = Colors.Black;
+            view.Css.BackgroundColor = "#43aaa9";
 
             return Task.CompletedTask;
         }
@@ -2977,7 +2127,7 @@ namespace File_App.UI.Styles.Core
 namespace File_App.UI.Styles.Core
 {
     [CssSelector("Styles\\_Core.css", "CheckBox > #CheckedImage")]
-    [CssBody("width: 100%; height: 100%; background-image: url(Images/Icons/Check.png); background-size: contain; padding: 5px;")]
+    [CssBody("width: 100%; height: 100%; background-image: url(Images/Icons/Check.png); background-size: contain; padding: 2px;")]
     class CheckBoxCheckedImageCssRule : CssRule
     {
         public override bool Matches(View view)
@@ -2997,7 +2147,7 @@ namespace File_App.UI.Styles.Core
             view.Css.BackgroundImageStretch = Stretch.Fit;
             view.Css.Height = 100.Percent();
             view.Css.Width = 100.Percent();
-            view.Css.Padding(5);
+            view.Css.Padding(2);
             view.Css.BackgroundImagePath = "Images/Icons/Check.png";
 
             return Task.CompletedTask;
@@ -3148,7 +2298,7 @@ namespace File_App.UI.Styles.Core
 namespace File_App.UI.Styles.Core
 {
     [CssSelector("Styles\\_Core.css", "SearchInput > #CancelButton")]
-    [CssBody("border: 0; height: 35px; left: 100%; white-space: nowrap; padding: 0; padding-left: 0; opacity: 0;")]
+    [CssBody("border: 0; height: 100%; left: 100%; white-space: nowrap; padding: 0; opacity: 0;")]
     class SearchInputCancelButtonCssRule : CssRule
     {
         public override bool Matches(View view)
@@ -3165,9 +2315,8 @@ namespace File_App.UI.Styles.Core
 
         public override Task Apply(View view)
         {
-            view.Css.Height = 35;
+            view.Css.Height = 100.Percent();
             view.Css.Padding(0);
-            view.Css.Padding.Left = 0;
             view.Css.Border = 0;
             view.Css.X = 100.Percent();
             view.Css.WrapText = false;
@@ -3397,7 +2546,7 @@ namespace File_App.UI.Styles.Core
 namespace File_App.UI.Styles.Core
 {
     [CssSelector("Styles\\_Core.css", "Dialog")]
-    [CssBody("background: white; padding: 15px;")]
+    [CssBody("background: white; padding: 15px; margin-top: calc(\"View.Root.Height, view.Height, (r, h) => (r - h) / 2\");")]
     class DialogCssRule : CssRule
     {
         public override bool Matches(View view)
@@ -3411,6 +2560,7 @@ namespace File_App.UI.Styles.Core
         {
             var view = (Dialog)untypedView;
             view.Css.Padding(15);
+            view.Css.Margin.Top = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r, h) => (r - h) / 2);
             view.Css.BackgroundColor = Colors.White;
 
             return Task.CompletedTask;
@@ -3867,24 +3017,25 @@ namespace File_App.UI.Styles.Core
 
 namespace File_App.UI.Styles.Core
 {
-    [CssSelector("Styles\\_Core.css", "NavBarPage > #BodyScroller")]
-    [CssBody("background: white;")]
+    [CssSelector("Styles\\_Core.css", "NavBarPage #BodyScroller")]
+    [CssBody("background: white; height: 100%; width: 100%;")]
     class NavBarPageBodyScrollerCssRule : CssRule
     {
         public override bool Matches(View view)
         {
             // CssEngine will only call me if a view matches: #BodyScroller
 
-            view = view.parent;
+            view = CssEngine.FindParentByType<NavBarPage>(view);
 
             if (view == null) return false;
-            else if (!(view is NavBarPage)) return false;
 
             return true;
         }
 
         public override Task Apply(View view)
         {
+            view.Css.Height = 100.Percent();
+            view.Css.Width = 100.Percent();
             view.Css.BackgroundColor = Colors.White;
 
             return Task.CompletedTask;
@@ -3894,7 +3045,7 @@ namespace File_App.UI.Styles.Core
 
 namespace File_App.UI.Styles.Core
 {
-    [CssSelector("Styles\\_Core.css", "NavBarPage > #BodyScroller > #Body")]
+    [CssSelector("Styles\\_Core.css", "NavBarPage #BodyScroller > #Body")]
     [CssBody("padding: 10px;")]
     class NavBarPageBodyScrollerBodyCssRule : CssRule
     {
@@ -3907,10 +3058,9 @@ namespace File_App.UI.Styles.Core
             if (view == null) return false;
             else if (!(view.Id == "BodyScroller")) return false;
 
-            view = view.parent;
+            view = CssEngine.FindParentByType<NavBarPage>(view);
 
             if (view == null) return false;
-            else if (!(view is NavBarPage)) return false;
 
             return true;
         }
@@ -3981,20 +3131,20 @@ namespace File_App.UI.Styles.Core
 
 namespace File_App.UI.Styles.Core
 {
-    [CssSelector("Styles\\_Core.css", "Waiting-Indicator")]
+    [CssSelector("Styles\\_Core.css", "Indicator")]
     [CssBody("height: 60px; border-radius: 30px;")]
-    class WaitingIndicatorCssRule : CssRule
+    class IndicatorCssRule : CssRule
     {
         public override bool Matches(View view)
         {
-            // CssEngine will only call me if a view matches: Waiting-Indicator
+            // CssEngine will only call me if a view matches: Indicator
 
             return true;
         }
 
         public override Task Apply(View untypedView)
         {
-            var view = (Waiting.Indicator)untypedView;
+            var view = (Indicator)untypedView;
             view.Css.Height = 60;
             view.Css.Border.Radius = 30;
 
@@ -4005,15 +3155,15 @@ namespace File_App.UI.Styles.Core
 
 namespace File_App.UI.Styles.Core
 {
-    [CssSelector("Styles\\_Core.css", "Waiting-Indicator ImageView")]
+    [CssSelector("Styles\\_Core.css", "Indicator ImageView")]
     [CssBody("height: 100%;")]
-    class WaitingIndicatorImageViewCssRule : CssRule
+    class IndicatorImageViewCssRule : CssRule
     {
         public override bool Matches(View view)
         {
             // CssEngine will only call me if a view matches: ImageView
 
-            view = CssEngine.FindParentByType<Waiting.Indicator>(view);
+            view = CssEngine.FindParentByType<Indicator>(view);
 
             if (view == null) return false;
 
@@ -4024,6 +3174,33 @@ namespace File_App.UI.Styles.Core
         {
             var view = (ImageView)untypedView;
             view.Css.Height = 100.Percent();
+
+            return Task.CompletedTask;
+        }
+    }
+}
+
+namespace File_App.UI.Styles.Core
+{
+    [CssSelector("Styles\\_Core.css", "#Indicator")]
+    [CssBody("width: 100px; color: black; font-size: 16px; position: absolute; top: calc(\"View.Root.Height, view.Height, (r,h) => (r - h) / 2\"); left: calc(\"View.Root.Width, view.Width, (r,w) => (r - w) / 2\");")]
+    class Indicator_1CssRule : CssRule
+    {
+        public override bool Matches(View view)
+        {
+            // CssEngine will only call me if a view matches: #Indicator
+
+            return true;
+        }
+
+        public override Task Apply(View view)
+        {
+            view.Css.Width = 100;
+            view.Css.Font.Size = 16;
+            view.Css.TextColor = Colors.Black;
+            view.Css.Absolute = true;
+            view.Css.Y = new Length.BindingLengthRequest(View.Root.Height, view.Height, (r,h) => (r - h) / 2);
+            view.Css.X = new Length.BindingLengthRequest(View.Root.Width, view.Width, (r,w) => (r - w) / 2);
 
             return Task.CompletedTask;
         }
@@ -4356,7 +3533,7 @@ namespace File_App.UI.Styles.Core
 namespace File_App.UI.Styles.Core
 {
     [CssSelector("Styles\\_Core.css", "Picker #Label")]
-    [CssBody("height: 100%;")]
+    [CssBody("height: auto;")]
     class PickerLabelCssRule : CssRule
     {
         public override bool Matches(View view)
@@ -4372,7 +3549,7 @@ namespace File_App.UI.Styles.Core
 
         public override Task Apply(View view)
         {
-            view.Css.Height = 100.Percent();
+            view.Css.Height = null;
 
             return Task.CompletedTask;
         }

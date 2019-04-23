@@ -1,4 +1,4 @@
-namespace UI
+﻿namespace UI
 {
     using System;
     using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace UI
     {
         public override async Task Run()
         {
-            ApplicationName = "$SolutionName$";
+            ApplicationName = "AppName6";
 
             await InstallIfNeeded();
 

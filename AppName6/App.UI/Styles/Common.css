@@ -6,38 +6,37 @@ TextView { color: black; }
 
 Button { opacity: 1; }
 
-    Button:disabled { opacity: 0.3; }
+Button:disabled { opacity: 0.3; }
 
 ImageView { opacity: 1; }
 
-    ImageView:disabled { opacity: 0.3; }
+ImageView:disabled { opacity: 0.3; }
 
 IconButton { opacity: 1; }
 
-    IconButton:disabled { opacity: 0.3; }
+IconButton:disabled { opacity: 0.3; }
 
-    IconButton #TextView { color: white; }
+IconButton #TextView { color: white; }
 
 PopUp, Indicator { margin-top: calc("View.Root.Height, view.Height, (r,h) => (r - h) / 2"); }
 
-    PopUp #HeaderTitle, PopUp #Title { font-size: 20px; }
+PopUp #HeaderTitle, PopUp #Title { font-size: 20px; }
 
-    Indicator #Image { background: url(Images/icons/Spinner.gif); }
+Indicator #Image { background: url(Images/icons/Spinner.gif); }
 
 /*Dialogs ----------------*/
 Dialog #Title { color: #43aaa9; font-size: 20px; }
 
 Dialog #ButtonsRow Button { color: #43aaa9; }
 
-    Dialog #ButtonsRow Button.primary-button { color: white; }
+Dialog #ButtonsRow Button.primary-button { color: white; }
 
 Toast { background: white; padding: 20px; background: black; }
 
-    Toast #Label { color: white; }
+Toast #Label { color: white; }
 
-    Toast #OKButton { color: #43aaa9; }
+Toast #OKButton { color: #43aaa9; }
 
-/*Form -------------------*/
 TextInput { padding: 7px; }
 
 Switch #Bar { background: #C8C8C8; }
@@ -52,12 +51,26 @@ OptionsList OptionsList-Option:checked #Label { color: #43aaa9; }
 
 Picker { padding: 7px; border-color: #e6e6e6; }
 
-    Picker #Caret { background: url(Images/Icons/Caret.png); }
+Picker #Caret { background: url(Images/Icons/Caret.png); }
 
+/*FilePicker-Dialog {
+    IconButton {
+        @extend .primary-button;
+    }
+    #PickPhotoButton #Icon { background: url(Images/Icons/Pick-photo.png); }
+    #PickVideoButton #Icon { background: url(Images/Icons/Pick-video.png); }
+    #TakePhotoButton #Icon { background: url(Images/Icons/Take-photo.png); }
+    #TakeVideoButton #Icon { background: url(Images/Icons/Take-video.png); }
+}*/
 DatePicker-Cell #Label, TimePicker-Cell #Label { color: #C8C8C8; }
 
 DatePicker-Cell:active #Label, TimePicker-Cell:active #Label { color: black; }
 
+/*Slider {
+    #RangeBar { background: $grey; }
+    #SelectedBar, #Handle, #UpHandle { background: $primary-color; }
+    #Caption, #UpCaption { }
+}*/
 /*Navigation bar ----------------------------- */
 .navbar-background { background: linear-gradient(to bottom, #43aaa9, #196e6d); }
 
@@ -71,7 +84,7 @@ NavigationBar .navbar-button { width: 42px; height: 100%; color: white; }
 
 NavigationBar .back { color: white; }
 
-    NavigationBar .back #Icon { background: url(Images/Icons/Back.png); margin: 0; width: 48px; padding: 10px 5px; height: 100%; }
+NavigationBar .back #Icon { background: url(Images/Icons/Back.png); margin: 0; width: 48px; padding: 10px 5px; height: 100%; }
 
 NavigationBar .menu-icon { background: url(Images/Icons/Burger.png); margin: 0; height: 45px; }
 
@@ -79,14 +92,14 @@ Modal { background: white; padding: 20px; height: auto; }
 
 MenuDisplayer { position: absolute; width: 100%; height: 100%; MenuWidth: 250px; }
 
-    MenuDisplayer #Overlay { width: 100%; height: 100%; opacity: 0.35; background: black; }
+MenuDisplayer #Overlay { width: 100%; height: 100%; opacity: 0.35; background: black; }
 
 /*Tabs --------------------- */
 Tabs Tabs-Tab { background-color: transparent; }
 
-    Tabs Tabs-Tab:active { background-color: #43aaa9; }
+Tabs Tabs-Tab:active { background-color: #43aaa9; }
 
-    Tabs Tabs-Tab #Label { color: #eeeeee; padding-top: 5px; }
+Tabs Tabs-Tab #Label { color: #eeeeee; padding-top: 5px; }
 
 /*list views ----------------*/
 ListView #EmptyTextLabel { color: #C8C8C8; }
@@ -95,23 +108,23 @@ ListView .view-row { width: 20px; height: 100%; }
 
 ListView ListViewItem { border-color: #e6e6e6; }
 
-    ListView ListViewItem .title { font-weight: bold; margin-bottom: 10px; }
+ListView ListViewItem .title { font-weight: bold; margin-bottom: 10px; }
 
 ListView #RightSlideIn TextView { height: 100%; margin: 0; color: white; background: #444; padding: 10px; AutoSizeWidth: calc("true"); }
 
-    ListView #RightSlideIn TextView.delete-button { background: #ff4c32; }
+ListView #RightSlideIn TextView.delete-button { background: #ff4c32; }
 
 .standard-list ListViewItem { padding: 10px; }
 
-    .standard-list ListViewItem .icon { width: 60px; }
+.standard-list ListViewItem .icon { width: 60px; }
 
 .standard-list ListView:lazy-loaded ListViewItem { height: 60px; }
 
 SearchInput { margin-bottom: 5px; }
 
-    SearchInput #TextBox { text-align: center; }
+SearchInput #TextBox { text-align: center; }
 
-    SearchInput:focus #TextBox { text-align: left; }
+SearchInput:focus #TextBox { text-align: left; }
 
 /*App components -----------------*/
 .module-header-title { color: #43aaa9; margin-bottom: 20px; }
@@ -129,10 +142,15 @@ SearchInput { margin-bottom: 5px; }
 /*main menu --------------------*/
 MainMenu { background: #282828; }
 
-    MainMenu Button { color: white; height: 50px; }
+MainMenu Button { color: white; height: 50px; }
 
-    MainMenu #LogoImage { height: 90px; width: 100%; margin-bottom: 10px; margin-top: 10px; }
+MainMenu #LogoImage { height: 90px; width: 100%; margin-bottom: 10px; margin-top: 10px; }
 
-    MainMenu IconButton { height: 50px; border-bottom-width: 1px; border-color: #505050; color: white; }
+MainMenu IconButton { height: 50px; border-bottom-width: 1px; border-color: #505050; color: white; }
 
-        MainMenu IconButton #Icon { background-size: contain; margin-top: 7px; height: 25px; width: 30px; margin-left: 10px; }
+MainMenu IconButton #Icon { background-size: contain; margin-top: 7px; height: 25px; width: 30px; margin-left: 10px; }
+
+/*Carousel-Bullet { background: #C8C8C8;
+    &:active { background: #505050; }
+}*/
+Default #BodyScroller > #Body { padding: 10px; }

@@ -11,12 +11,11 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Android</RootNamespace>
-    <AssemblyName>$SolutionName$</AssemblyName>
+    <AssemblyName>AppName6</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <NuGetPackageImportStamp>
@@ -153,7 +152,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SplashScreen.cs" />
     <None Include="-READ-ME-NOW!!!!!!!!!!!!.txt" />
-    <None Include="-RUN-ME-NOW!!!!!!!!!!!!!.bat" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

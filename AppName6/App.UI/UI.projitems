@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
@@ -30,6 +29,12 @@
     <None Include="$(MSBuildThisFileDirectory)Styles\iOS.scss" />
     <None Include="$(MSBuildThisFileDirectory)Styles\_Settings.scss" />
     <None Include="$(MSBuildThisFileDirectory)Styles\Android.scss" />
+    <Compile Include="$(MSBuildThisFileDirectory)StartUp.cs" />
+    <None Include="$(MSBuildThisFileDirectory)Styles\Android.css" />
+    <None Include="$(MSBuildThisFileDirectory)Styles\Common.css" />
+    <None Include="$(MSBuildThisFileDirectory)Styles\iOS.css" />
+    <None Include="$(MSBuildThisFileDirectory)Styles\Windows.css" />
+    <None Include="$(MSBuildThisFileDirectory)Styles\_Core.css" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -106,8 +111,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="$(MSBuildThisFileDirectory)Views\.zebble-schema.xml" />
-    <None Include="$(MSBuildThisFileDirectory)Views\Welcome.zbl" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Welcome.zbl.cs" />
     <None Include="$(MSBuildThisFileDirectory)Views\Modules\Contact\ContactForm.zbl" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Modules\Contact\ContactForm.zbl.cs" />
     <None Include="$(MSBuildThisFileDirectory)Views\Modules\Contact\ContactsList.zbl" />
@@ -126,11 +129,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Pages\Page4.zbl.cs" />
     <None Include="$(MSBuildThisFileDirectory)Views\Pages\Page5.zbl" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Pages\Page5.zbl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StartUp.cs" />
-    <None Include="$(MSBuildThisFileDirectory)Styles\Android.css" />
-    <None Include="$(MSBuildThisFileDirectory)Styles\Common.css" />
-    <None Include="$(MSBuildThisFileDirectory)Styles\iOS.css" />
-    <None Include="$(MSBuildThisFileDirectory)Styles\Windows.css" />
-    <None Include="$(MSBuildThisFileDirectory)Styles\_Core.css" />
+    <None Include="$(MSBuildThisFileDirectory)Views\Welcome.zbl" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Welcome.zbl.cs" />
   </ItemGroup>
 </Project>

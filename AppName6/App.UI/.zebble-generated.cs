@@ -12,32 +12,70 @@ namespace UI.Modules
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
-    public class MainTabs : Zebble.Tabs
+    public partial class MainTabs : Zebble.Tabs
     {
-        public override async Task OnInitializing()
+        protected override async Task InitializeFromMarkup()
         {
-            await base.OnInitializing();
+            await base.InitializeFromMarkup();
 
-            Add(new Tabs.Tab<Pages.Page1>())
+            var __tabs_Tab1 = new Tabs.Tab<Pages.Page1>()
             .Set(x => x.Label.Text = "Page 1")
             .Set(x => x.Icon.Path = "Images/Icons/Contacts.png");
 
-            Add(new Tabs.Tab<Pages.Page2>())
+            var __tabs_Tab2 = new Tabs.Tab<Pages.Page2>()
             .Set(x => x.Label.Text = "Page 2")
             .Set(x => x.Icon.Path = "Images/Icons/Types.png");
 
-            Add(new Tabs.Tab<Pages.Page3>())
+            var __tabs_Tab3 = new Tabs.Tab<Pages.Page3>()
             .Set(x => x.Label.Text = "Page 3")
             .Set(x => x.Icon.Path = "Images/Icons/Video.png");
 
-            Add(new Tabs.Tab<Pages.Page4>())
+            var __tabs_Tab4 = new Tabs.Tab<Pages.Page4>()
             .Set(x => x.Label.Text = "Page 4")
             .Set(x => x.Icon.Path = "Images/Icons/Contacts.png");
 
-            Add(new Tabs.Tab<Pages.Page5>())
+            var __tabs_Tab5 = new Tabs.Tab<Pages.Page5>()
             .Set(x => x.Label.Text = "Page 5")
             .Set(x => x.Icon.Path = "Images/Icons/Settings.png");
+
+            await AddRange(new View[] { __tabs_Tab1, __tabs_Tab2, __tabs_Tab3, __tabs_Tab4, __tabs_Tab5 });
+        }
+    }
+}
+#endregion
+
+#region UI.Pages.Welcome
+namespace UI.Pages
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Domain;
+    using Zebble;
+    using Zebble.Plugin;
+
+    public partial class Welcome : Page
+    {
+        protected override async Task InitializeFromMarkup()
+        {
+            await base.InitializeFromMarkup();
+
+            Style.Height = 100.Percent();
+
+            var __textView1 = new TextView { Text = "WELCOME\n\n\n" }
+            .Set(x => x.Style.Height = 100.Percent())
+            .Set(x => x.Style.Width = 100.Percent())
+            .Set(x => x.Style.Font.Size = 22)
+            .Set(x => x.Style.BackgroundColor = "#555")
+            .Set(x => x.Style.TextColor = Colors.White)
+            .Set(x => x.Style.TextAlignment = Alignment.Middle)
+            .Set(x => x.Style.TextAlignment = Alignment.Middle);
+
+            await Add(__textView1);
         }
     }
 }
@@ -53,62 +91,47 @@ namespace UI.Modules
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class ContactForm : Stack
     {
         public Button SaveButton;
         public TextView HeaderTitle;
         public FormField<TextInput> Name, Email, Tel, Notes;
-        public FormField<Slider> Number;
         public FormField<DatePicker> DateOfBirth;
-        public FormField<TimePicker> TimeOfBirth;
-        public FormField<ItemPicker> Type, Types;
-        public FormField<Switch> IsNice;
+        public FormField<ItemPicker> Type;
 
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
-            Page.GetNavBar().AddButton(ButtonLocation.Right, SaveButton = new Button { Id = "SaveButton", Text = "Save", CssClass = "navbar-button" })
+
+            SaveButton = new Button { Id = "SaveButton", Text = "Save", CssClass = "navbar-button" }
             .On(x => x.Tapped, SaveButtonTapped);
 
-            Add(HeaderTitle = new TextView
+            HeaderTitle = new TextView
             {
                 Id = "HeaderTitle",
                 Text = "Contact Details",
                 CssClass = "module-header-title"
-            }
-            );
+            };
 
-            Add(Name = new FormField<TextInput> { Id = "Name", LabelText = "Name", Mandatory = true });
+            Name = new FormField<TextInput> { Id = "Name", LabelText = "Name", Mandatory = true };
 
-            Add(Email = new FormField<TextInput> { Id = "Email", LabelText = "Email" });
+            Email = new FormField<TextInput> { Id = "Email", LabelText = "Email" };
 
-            Add(Number = new FormField<Slider> { Id = "Number", LabelText = "Number", Mandatory = true })
-            .Set(x => x.Control.MinValue = 0)
-            .Set(x => x.Control.MaxValue = 20);
+            Tel = new FormField<TextInput> { Id = "Tel", LabelText = "Tel" };
 
-            Add(Tel = new FormField<TextInput> { Id = "Tel", LabelText = "Tel" });
-
-            Add(Notes = new FormField<TextInput> { Id = "Notes", LabelText = "Notes" })
+            Notes = new FormField<TextInput> { Id = "Notes", LabelText = "Notes" }
             .Set(x => x.Control.Lines = 5);
 
-            Add(DateOfBirth = new FormField<DatePicker> { Id = "DateOfBirth", LabelText = "Date of birth" })
+            DateOfBirth = new FormField<DatePicker> { Id = "DateOfBirth", LabelText = "Date of birth" }
             .Set(x => x.Control.AllowNull = true);
 
-            Add(TimeOfBirth = new FormField<TimePicker> { Id = "TimeOfBirth", LabelText = "Time of birth" })
+            Type = new FormField<ItemPicker> { Id = "Type", LabelText = "Type" }
             .Set(x => x.Control.AllowNull = true);
 
-            Add(Type = new FormField<ItemPicker> { Id = "Type", LabelText = "Type" })
-            .Set(x => x.Control.AllowNull = true)
-            .Set(x => x.Control.DataSource = (Database.GetList<ContactType>()));
-
-            Add(Types = new FormField<ItemPicker> { Id = "Types", LabelText = "Types" })
-            .Set(x => x.Control.MultiSelect = true)
-            .Set(x => x.Control.DataSource = (Database.GetList<ContactType>()));
-
-            Add(IsNice = new FormField<Switch> { Id = "IsNice", LabelText = "Is nice" });
-
-            return Task.CompletedTask;
+            await ((NavBarPage)Page).GetNavBar().AddButton(ButtonLocation.Right, SaveButton);
+            await AddRange(new View[] { HeaderTitle, Name, Email, Tel, Notes, DateOfBirth, Type });
         }
     }
 }
@@ -124,6 +147,7 @@ namespace UI.Modules
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class ContactsList : Stack
     {
@@ -136,126 +160,102 @@ namespace UI.Modules
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             CssClass = "standard-list";
 
-            Page.GetNavBar().AddButton(ButtonLocation.Right, AddButton = new ImageView
+            AddButton = new ImageView
             {
                 Id = "AddButton",
                 CssClass = "navbar-button",
                 Path = "Images/Icons/White-Add.png"
-            }
-            ).On(x => x.Tapped, () =>
-            {
-                try { return Nav.Forward<Pages.Page1Enter>(); }
-                catch (Exception ex) { return Alert.Show(ex.Message); }
-            }
-            );
-
-            Add(HeaderTitle = new TextView
-            {
-                Id = "HeaderTitle",
-                Text = "Contacts",
-                CssClass = "module-header-title"
-            }
-            );
-
-            Add(HeaderIntro = new TextView
-            {
-                Id = "HeaderIntro",
-                Text = "This module allows you to see all your contacts, interact with them and generally have a lot of fun with it. Am I long enough now?",
-                CssClass = "header-intro"
-            }
-            );
-
-            Add(ButtonsContainer = new Stack
-            {
-                Id = "ButtonsContainer",
-                Direction = RepeatDirection.Horizontal,
-                CssClass = "top-buttons-row"
-            }
-            );
-
-            ButtonsContainer.Add(ReloadButton = new Button { Id = "ReloadButton", Text = "Reload" })
-            .On(x => x.Tapped, ReloadButtonTapped);
-
-            Add(List = new ListView<Contact, Row>(Items, lazyLoad: true) { Id = "List", EmptyText = "Empty list" });
-
-            return Task.CompletedTask;
-        }
-
-        public partial class Row : ListViewItem, IListViewItem<Contact>
-        {
-            public ImageView PhotoImage, ViewButton;
-            public Stack NameColumn;
-            public TextView Name, ContactDetails;
-            public Button DeleteButton;
-
-            protected override async Task InitializeFromMarkup()
-            {
-                await base.InitializeFromMarkup();
-                Add(PhotoImage = new ImageView { Id = "PhotoImage", CssClass = "icon", Path = Item.Photo.Path })
-                .Set(x => x.Style.Visible = (Module.ShowPhotoColumn && Item.Photo.HasValue()))
-                .Set(x => x.Style.Ignored = !(Module.ShowPhotoColumn));
-
-                Add(NameColumn = new Stack { Id = "NameColumn" });
-
-                NameColumn.Add(Name = new TextView { Id = "Name", CssClass = "title", Text = Item.Name });
-
-                NameColumn.Add(ContactDetails = new TextView
+                }.On(x => x.Tapped, () =>
                 {
-                    Id = "ContactDetails",
-                    Text = (new[] { Item.Email, Item.Tel }.Trim().ToString(", "))
+                    try { return Nav.Forward<Pages.Page1Enter>(); }
+                    catch (Exception ex) { return Alert.Show(ex.Message); }
                 }
                 );
 
-                Add(ViewButton = new ImageView
+                HeaderTitle = new TextView
                 {
-                    Id = "ViewButton",
-                    CssClass = "view-row",
-                    Path = "Images/Icons/Arrow-Right.png",
-                    AutoFlash = true
-                }
-                )
-                .On(x => x.Tapped, ViewButtonTapped);
+                    Id = "HeaderTitle",
+                    Text = "Contacts",
+                    CssClass = "module-header-title"
+                };
 
-                SlideIn.Add(DeleteButton = new Button { Id = "DeleteButton", Text = "Delete", CssClass = "delete-button" })
-                .On(x => x.Tapped, DeleteButtonTapped);
+                HeaderIntro = new TextView
+                {
+                    Id = "HeaderIntro",
+                    Text = "This module allows you to see all your contacts, interact with them and generally have a lot of fun with it. Am I long enough now?",
+                    CssClass = "header-intro"
+                };
 
-                return Task.CompletedTask;
+                ButtonsContainer = new Stack
+                {
+                    Id = "ButtonsContainer",
+                    Direction = RepeatDirection.Horizontal,
+                    CssClass = "top-buttons-row"
+                };
+
+                ReloadButton = new Button { Id = "ReloadButton", Text = "Reload" }
+                .On(x => x.Tapped, ReloadButtonTapped);
+
+                List = new ListView<Contact, Row> { Id = "List", LazyLoad = true, DataSource = Items, };
+
+                var __listView_EmptyTemplate1 = new ListView.EmptyTemplate();
+
+                var __textView1 = new TextView { Text = "Nothing in pending list" };
+
+                await __listView_EmptyTemplate1.Add(__textView1);
+                await ButtonsContainer.Add(ReloadButton);
+                await List.Add(__listView_EmptyTemplate1);
+                await ((NavBarPage)Page).GetNavBar().AddButton(ButtonLocation.Right, AddButton);
+                await AddRange(new View[] { HeaderTitle, HeaderIntro, ButtonsContainer, List });
             }
-        }
-    }
-}
-#endregion
 
-#region UI.Modules.Types_ContactFormFormInfo
-namespace UI.Modules
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Domain;
-    using Zebble;
+            public partial class Row : ListViewItem<Contact>
+            {
+                public Stack NameColumn;
+                public TextView Name, ContactDetails;
+                public ImageView ViewButton;
+                public Button DeleteButton;
 
-    public partial class Types_ContactFormFormInfo : Stack
-    {
-        public FormField<ItemPicker> ContactType;
+                protected override async Task InitializeFromMarkup()
+                {
+                    await base.InitializeFromMarkup();
 
-        protected override async Task InitializeFromMarkup()
-        {
-            await base.InitializeFromMarkup();
+                    AutoFlash = true;
 
-            Add(ContactType = new FormField<ItemPicker> { Id = "ContactType", LabelText = "Contact type" })
-            .Set(x => x.Control.AllowNull = true)
-            .Set(x => x.Control.DataSource = (Database.GetList<ContactType>()));
+                    Tapped.Handle(ViewButtonTapped);
 
-            return Task.CompletedTask;
-        }
-    }
-}
-#endregion
+                    NameColumn = new Stack { Id = "NameColumn" };
+
+                    Name = new TextView { Id = "Name", CssClass = "title", Text = Item.Name };
+
+                    ContactDetails = new TextView
+                    {
+                        Id = "ContactDetails",
+                        Text = (new[]{Item.Email , Item.Tel}.Trim().ToString(", "))
+                    };
+
+                    ViewButton = new ImageView
+                    {
+                        Id = "ViewButton",
+                        CssClass = "view-row",
+                        Path = "Images/Icons/Arrow-Right.png",
+                        AutoFlash = true
+                    }
+                    .On(x => x.Tapped, ViewButtonTapped);
+
+                    DeleteButton = new Button { Id = "DeleteButton", Text = "Delete", CssClass = "delete-button" }
+                    .On(x => x.Tapped, DeleteButtonTapped);
+
+                    await NameColumn.AddRange(new View[] { Name, ContactDetails });
+                    await RightSlideIn.Add(DeleteButton);
+                    await AddRange(new View[] { NameColumn, ViewButton });
+                }
+                }}
+            }
+            #endregion
 
 #region UI.Modules.MainMenu
 namespace UI.Modules
@@ -267,6 +267,7 @@ namespace UI.Modules
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class MainMenu : Canvas
     {
@@ -278,33 +279,40 @@ namespace UI.Modules
         {
             await base.InitializeFromMarkup();
 
-            Add(Body = new Stack { Id = "Body" });
+            Body = new Stack { Id = "Body" };
 
-            Body.Add(ButtonsContainer = new Stack
+            ButtonsContainer = new Stack
             {
                 Id = "ButtonsContainer",
                 Direction = RepeatDirection.Horizontal,
                 CssClass = "top-buttons-row"
-            }
-            );
+            };
 
-            ButtonsContainer.Add(LogoImage = new ImageView { Id = "LogoImage", Path = "/Images/Logo.png" });
+            LogoImage = new ImageView { Id = "LogoImage", Path = "/Images/Logo.png" };
 
-            Body.Add(Items = new Stack { Id = "Items" });
+            Items = new Stack { Id = "Items" };
 
-            Items.Add(Page1 = new IconButton { Id = "Page1", Text = "Page 1", IconPath = "Images/Icons/contacts.png" })
+            Page1 = new IconButton { Id = "Page1", Text = "Page 1", IconPath = "Images/Icons/contacts.png" }
             .On(x => x.Tapped, Page1Tapped);
 
-            Items.Add(Page2 = new IconButton { Id = "Page2", Text = "Page 2", IconPath = "Images/Icons/Types.png" })
+            Page2 = new IconButton { Id = "Page2", Text = "Page 2", IconPath = "Images/Icons/Types.png" }
             .On(x => x.Tapped, Page2Tapped);
 
-            Items.Add(Page3 = new IconButton { Id = "Page3", Text = "Page 3", IconPath = "Images/Icons/Settings.png" })
+            Page3 = new IconButton { Id = "Page3", Text = "Page 3", IconPath = "Images/Icons/Settings.png" }
             .On(x => x.Tapped, Page3Tapped);
 
-            Items.Add(Contact = new IconButton { Id = "Contact", Text = "Page 4", IconPath = "Images/Icons/Contacts.png" })
+            Contact = new IconButton
+            {
+                Id = "Contact",
+                Text = "Page 4",
+                IconPath = "Images/Icons/Contacts.png"
+            }
             .On(x => x.Tapped, ContactTapped);
 
-            return Task.CompletedTask;
+            await ButtonsContainer.Add(LogoImage);
+            await Items.AddRange(new View[] { Page1, Page2, Page3, Contact });
+            await Body.AddRange(new View[] { ButtonsContainer, Items });
+            await Add(Body);
         }
     }
 }
@@ -320,6 +328,7 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page1 : Templates.Default
     {
@@ -328,12 +337,13 @@ namespace UI.Pages
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "Page 1";
 
-            Body.Add(ContactsList = new Modules.ContactsList { Id = "ContactsList" });
+            ContactsList = new Modules.ContactsList { Id = "ContactsList" };
 
-            return Task.CompletedTask;
+            await Body.Add(ContactsList);
         }
     }
 }
@@ -349,16 +359,16 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page2 : Templates.Default
     {
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "Page 2";
-
-            return Task.CompletedTask;
         }
     }
 }
@@ -374,16 +384,16 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page3 : Templates.Default
     {
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "Page 3";
-
-            return Task.CompletedTask;
         }
     }
 }
@@ -399,16 +409,16 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page4 : Templates.Default
     {
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "Page 4";
-
-            return Task.CompletedTask;
         }
     }
 }
@@ -424,18 +434,20 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page5 : Templates.Default
     {
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "About us";
 
-            Body.Add(new TextView { Text = "Hello world!" });
+            var __textView1 = new TextView { Text = "Hello world!" };
 
-            return Task.CompletedTask;
+            await Body.Add(__textView1);
         }
     }
 }
@@ -451,6 +463,7 @@ namespace UI.Pages
     using System.Threading.Tasks;
     using Domain;
     using Zebble;
+    using Zebble.Plugin;
 
     public partial class Page1Enter : Templates.Default
     {
@@ -460,14 +473,16 @@ namespace UI.Pages
         protected override async Task InitializeFromMarkup()
         {
             await base.InitializeFromMarkup();
+
             Data["TopMenu"] = "MainMenu";
             Title = "Contact details";
 
-            Body.Add(ContactFormLoader = new LazyLoader { Id = "ContactFormLoader" });
+            ContactFormLoader = new LazyLoader { Id = "ContactFormLoader" };
 
-            ContactFormLoader.Add(ContactForm = new Modules.ContactForm { Id = "ContactForm" });
+            ContactForm = new Modules.ContactForm { Id = "ContactForm" };
 
-            return Task.CompletedTask;
+            await ContactFormLoader.Add(ContactForm);
+            await Body.Add(ContactFormLoader);
         }
     }
 }
@@ -478,6 +493,6 @@ namespace UI
     partial class StartUp
     {
         // Hashed content of all resources
-        public override string GetResourcesVersion() => "wGQYblglWZII4j4yadZWt0pRe4";
+        public override string GetResourcesVersion() => "Y4cLzaT8nmN35ExCCWUWgmoiyc";
     }
 }
