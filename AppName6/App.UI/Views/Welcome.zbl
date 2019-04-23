@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<z-Component z-type="Welcome" z-base="Page" z-namespace="UI.Pages" Style.Height="100%" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation=".zebble-schema.xml">
+    <TextView Style="width: 100%; height: 100%; font-size: 22pt; background: #555;  color: white; text-align: center; vertical-align: middle;"
+              Text="WELCOME&#xA;&#xA;&#xA;" />
+</z-Component>

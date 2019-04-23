@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<z-Component z-type="ContactForm" z-base="Stack" z-namespace="UI.Modules"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./../../.zebble-schema.xml">
+
+    <Button Id="SaveButton" Text="Save" CssClass="navbar-button" on-Tapped="@SaveButtonTapped"
+        z-navBar="right" />
+
+    <TextView Id="HeaderTitle" Text="Contact Details" CssClass="module-header-title" />
+
+    <FormField z-of="TextInput" Id="Name" LabelText="Name" Mandatory="true" />
+
+    <FormField z-of="TextInput" Id="Email" LabelText="Email" />
+
+    <FormField z-of="TextInput" Id="Tel" LabelText="Tel" />
+
+    <FormField z-of="TextInput" Id="Notes" LabelText="Notes" Control.Lines="@5" />
+
+    <FormField z-of="DatePicker" Id="DateOfBirth" LabelText="Date of birth" Control.AllowNull="true" />
+
+    <FormField z-of="ItemPicker" Id="Type" LabelText="Type" Control.AllowNull="true" />
+
+</z-Component>
